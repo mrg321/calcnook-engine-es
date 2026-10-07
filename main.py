@@ -6,6 +6,12 @@ import csv
 from io import StringIO
 import json
 from numbers import Real
+from pathlib import Path
+import sys
+
+SRC_PATH = Path(__file__).resolve().parent / "src"
+if SRC_PATH.is_dir():
+	sys.path.insert(0, str(SRC_PATH))
 
 from calcnook.countries.es import income_tax
 

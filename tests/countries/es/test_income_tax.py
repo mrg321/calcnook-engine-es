@@ -14,6 +14,15 @@ def test_madrid_default_general_base():
     assert result.income_after_irpf == pytest.approx(24_303.881325)
 
 
+def test_2026_uses_the_encoded_tax_scales():
+    result = income_tax.calculate(30_000, savings_base=10_000, year=2026)
+    current = income_tax.calculate(30_000, savings_base=10_000)
+
+    assert result.year == 2026
+    assert result.income_tax == pytest.approx(current.income_tax)
+    assert result.bracket_breakdown == current.bracket_breakdown
+
+
 def test_personal_minimum_can_use_general_and_savings_bases():
     result = income_tax.calculate(3_000, savings_base=4_000)
 
@@ -123,9 +132,10 @@ def test_invalid_minimum():
         income_tax.calculate(30_000, personal_minimum=-1)
 
 
-def test_unsupported_year():
+@pytest.mark.parametrize("year", [2024, 2027])
+def test_unsupported_year(year):
     with pytest.raises(ValueError, match="year"):
-        income_tax.calculate(30_000, year=2024)
+        income_tax.calculate(30_000, year=year)
 
 
 def test_unsupported_comunidad_autonoma():

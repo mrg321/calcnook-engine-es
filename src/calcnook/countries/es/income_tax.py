@@ -1,4 +1,7 @@
-"""Spanish IRPF estimator for the 2025 tax year, defaulting to Madrid.
+"""Spanish IRPF estimator for the 2025 and 2026 tax years, defaulting to Madrid.
+
+The encoded tax scales apply to both supported years; no separate 2026 scale
+changes are modeled.
 
 Inputs are the general and savings taxable bases after deductions and base
 reductions, before applying the personal and family minimum. The minimum is
@@ -20,6 +23,7 @@ from unicodedata import normalize
 
 
 SUPPORTED_YEAR = 2025
+SUPPORTED_YEARS = (SUPPORTED_YEAR, 2026)
 DEFAULT_COMUNIDAD_AUTONOMA = "Madrid"
 
 STATE_PERSONAL_MINIMUM = 5_550.0
@@ -424,7 +428,7 @@ def calculate(
 		savings_base: Annual savings taxable base in EUR, before any unused
 			personal and family minimum is applied.
 		comunidad_autonoma: Autonomous community or autonomous city.
-		year: Only the 2025 tax-year scales are currently available.
+		year: Tax year — 2025 and 2026 use the currently encoded scales.
 		personal_minimum: State personal and family minimum in EUR. Increase
 			this for applicable age, descendant, ascendant, or disability amounts.
 		regional_personal_minimum: Regional personal and family minimum in EUR.
@@ -456,8 +460,9 @@ def calculate(
 	values = (general_base, savings_base, personal_minimum, regional_minimum)
 	if any(not isfinite(value) or value < 0 for value in values):
 		raise ValueError("income bases and personal minimums must be finite and >= 0")
-	if year != SUPPORTED_YEAR:
-		raise ValueError(f"Only year={SUPPORTED_YEAR} scales are available")
+	if year not in SUPPORTED_YEARS:
+		supported_years = " or ".join(str(supported_year) for supported_year in SUPPORTED_YEARS)
+		raise ValueError(f"Only year={supported_years} scales are available")
 
 	state_minimum_used = min(general_base, personal_minimum)
 	regional_minimum_used = min(general_base, regional_minimum)

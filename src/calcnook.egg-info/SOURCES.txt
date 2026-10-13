@@ -2,7 +2,6 @@ LICENSE
 README.md
 pyproject.toml
 src/calcnook/__init__.py
-src/calcnook/py.typed
 src/calcnook.egg-info/PKG-INFO
 src/calcnook.egg-info/SOURCES.txt
 src/calcnook.egg-info/dependency_links.txt
@@ -15,13 +14,6 @@ src/calcnook/core/currency.py
 src/calcnook/core/loan_payment.py
 src/calcnook/core/periodic_investment.py
 src/calcnook/core/retirement.py
-src/calcnook/core/islamic/__init__.py
-src/calcnook/core/islamic/hajj_savings.py
-src/calcnook/core/islamic/halal_screen.py
-src/calcnook/core/islamic/ijarah.py
-src/calcnook/core/islamic/mudarabah.py
-src/calcnook/core/islamic/murabaha.py
-src/calcnook/core/islamic/zakat.py
 src/calcnook/countries/__init__.py
 src/calcnook/countries/ae/__init__.py
 src/calcnook/countries/ae/end_of_service_gratuity.py
@@ -30,7 +22,6 @@ src/calcnook/countries/au/__init__.py
 src/calcnook/countries/au/income_tax.py
 src/calcnook/countries/ca/__init__.py
 src/calcnook/countries/ca/income_tax.py
-src/calcnook/countries/es/__init__.py
 src/calcnook/countries/es/income_tax.py
 src/calcnook/countries/india/__init__.py
 src/calcnook/countries/india/advance_tax.py
@@ -41,10 +32,6 @@ src/calcnook/countries/india/gst.py
 src/calcnook/countries/india/hra_exemption.py
 src/calcnook/countries/india/income_tax.py
 src/calcnook/countries/india/pf_epf.py
-src/calcnook/countries/sa/__init__.py
-src/calcnook/countries/sa/end_of_service_gratuity.py
-src/calcnook/countries/sa/vat.py
-src/calcnook/countries/sa/zakat_citizen.py
 src/calcnook/countries/uk/__init__.py
 src/calcnook/countries/uk/income_tax.py
 src/calcnook/countries/us/__init__.py
